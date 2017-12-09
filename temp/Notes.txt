@@ -1,0 +1,88 @@
+%matplotlib inline
+%config InlineBackend.figure_format = 'retina'
+
+
+jupyter nbconvert --to html notebook.ipynb
+jupyter nbconvert notebook.ipynb --to slides --post serve
+
+%matplotlib inline
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn
+
+pd.options.display.max_rows = 8
+
+np.r_ for nonconsecutive iloc columns
+import numpy as np
+
+# create the standard errors dataframe
+df_SE = df.iloc[:,np.r_[0,12:22]]
+# view the first few rows to confirm this was successful
+df_SE.head
+
+df_08.to_csv('data_08.csv', index=False)
+df_18.to_csv('data_18.csv', index=False)
+
+df18.isnull().any()
+df08.shape[0] - df08.dropna().shape[0]
+
+df_08.rename(columns=lambda x: x.strip().lower().replace(" ", "_"), inplace=True)
+
+df['B'].str.extract('(\d+)').astype(int)
+df_18['cyl'] = df_18['cyl'].astype(int)
+
+-----------------------------------------
+
+mean = df['view_duration'].mean
+df['view_duration'].fillna(mean,inplace=True)
+
+sum(df.duplicated())
+df.drop_duplicates(inplace=True)
+
+df['timestamp'] = pd.to_datetime(df['timestamp'])
+
+df['education'].value_counts().plot(kind='bar')
+
+pd.plotting.scatter_matrix[df_cancer, figsize=(15,15)]
+
+df_cancer.plot(x='compactness', y='concavity', kind='scatter');
+
+df_a = df_census[df.census['income'] == ' >50K']
+df_b = df_census[df.census['income'] == ' <=50K']
+
+ind = df_a['education'].value_counts().index
+df_a['education'].value_counts()[ind].plot(kind='bar');
+df_b['education'].value_counts()[ind].plot(kind='bar');
+
+fixed_acidity	volatile_acidity	citric_acid	residual_sugar	chlorides	free_sulfur_dioxide	total_sulfur_dioxide	density	pH	sulphates	alcohol	quality	color
+
+df_m = df[df['diagnosis'] == 'M']
+df_m = df.query('diagnosis == "M"')
+
+# selecting records of people making over $50K
+df_a = df[df['income'] == ' >50K']
+df_a = df.query('income == " >50K"')
+
+colors = ['red','white']
+color_means = wine_df.groupoby('color')['quality'].mean()
+color.means.plot(kind='bar', title='Average Wine Quality by Color', colors=colors, alpha=.7)
+plt.xlabel('Colors', fontsize=18)
+plt.ylabel('Quality', fontsize=18)
+
+counts = wine_df.groupby(['quality','color']).count
+counts
+
+median = df['alcohol'].median()
+low = df.query('alcohol < {}'.format(median))
+high = df.query('alcohol >= {}'.format(median))
+
+locations = [1, 2]
+heights = [mean_quality_low, mean_quality_high]
+labels = ['Low', 'High']
+plt.bar(locations, heights, tick_label=labels)
+plt.title('Average Quality Ratings by Residual Sugar')
+plt.xlabel('Residual Sugar Content')
+plt.ylabel('Average Quality Rating');
+plt.show()
+
